@@ -1,8 +1,16 @@
 package config
 
-//Config contains all the configuration variables for this service
+// Config contains all the configuration variables for this service
 type Config struct {
-	LogLevel  string `mapstructure:"log_level"`
-	Port      int
-	SensorPin int `mapstructure:"sensor_pin" validate:"required,gte=0,lte=64"`
+	LogLevel string `validate:"required"`
+	HTTPPort uint16 `validate:"required"`
+	Kafka    Kafka
+}
+
+// Kafka contains the config for kafka
+type Kafka struct {
+	Version             string   `validate:"required"`
+	Brokers             []string `validate:"gt=0,dive,hostname_port"`
+	ClientID            string   `validate:"lowercase,printascii"`
+	LocationOutputTopic string   `validate:"required,lowercase,printascii"`
 }

@@ -1,7 +1,5 @@
 # Producer
 ![Build Go](https://github.com/Polygens/Producer/workflows/Build%20Go/badge.svg)
-Measuring my world
-
 
 ## Requirements
 

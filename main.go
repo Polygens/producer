@@ -1,16 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/polygens/producer-api/config"
-	creator "github.com/polygens/producer-api/producer"
+	"github.com/polygens/producer/config"
+	"github.com/polygens/producer/generator"
 )
 
 var version string
@@ -32,7 +32,8 @@ func main() {
 
 	r := mux.NewRouter()
 
-	creator.Init(r, cfg)
+	generator.Init(r, cfg)
+	defer generator.Close()
 
-	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(cfg.Port), r))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", cfg.HTTPPort), r))
 }

@@ -1,2 +1,7 @@
-log_level: debug
-port: 8080
+logLevel: debug
+httpPort: 8080
+kafka:
+  version: 2.4.1
+  brokers: kafka:9092
+  clientID: producer
+  locationOutputTopic: locations
